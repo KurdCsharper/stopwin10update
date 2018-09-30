@@ -26,13 +26,15 @@ namespace stopwin10update
         public MainWindow()
         {
             InitializeComponent();
+            ServiceController controller = GetService("wuauserv");
+            lblstatus.Content = controller.Status.ToString();
         }
-
+       
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                StopService("WinDefend");
+                StopService("wuauserv");
 
             }
             catch (Exception er)
@@ -42,6 +44,10 @@ namespace stopwin10update
             }
 
         }
+        /// <summary>
+        /// Get Service
+        /// </summary>
+        /// <param name="serviceName">Service Name</param>
         public static ServiceController GetService(string serviceName)
         {
             ServiceController[] services = ServiceController.GetServices();
@@ -54,6 +60,9 @@ namespace stopwin10update
             }
             return services[0];
         }
+        /// <summary>
+        /// check service status
+        /// </summary>
         public static bool IsServiceRunning(string serviceName)
         {
             ServiceControllerStatus status;
@@ -92,7 +101,7 @@ namespace stopwin10update
         }
         public static void StopService(string serviceName)
         {
-            ServiceController controller = GetService("WinDefend");
+            ServiceController controller = GetService("wuauserv");
             if (controller == null)
             {
                 return;

@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Foreground="Green" FontSize="15" FontFamily="Times New Roman">Stop Windows 10 Update</Label>
+        <Button Grid.Row="1" Width="120" Height="50" Name="btnStop" Click="btnStop_Click"></Button>
     </Grid>
 </Window>

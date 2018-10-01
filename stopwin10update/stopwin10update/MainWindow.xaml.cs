@@ -51,14 +51,19 @@ namespace stopwin10update
         /// </summary>
         private void RefreshLabel()
         {
-         
-                lblstatus.Dispatcher.BeginInvoke(new Action(delegate
-                {
-                    // Do your work
 
-                    lblstatus.Content = IsServiceRunning();
-                }));
-            
+            lblstatus.Dispatcher.BeginInvoke(new Action(delegate
+            {
+                // Do your work
+                bool isRunning = IsServiceRunning();
+                string status;
+                if (isRunning)
+                    status = "is running";
+                else
+                    status = "is stopped";
+                lblstatus.Content = "Windows Update " + status;
+            }));
+
         }
 
         private void btnStop_Click(object sender, RoutedEventArgs e)

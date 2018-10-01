@@ -15,7 +15,7 @@
             <RowDefinition Height="35*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Foreground="Black" FontSize="18" FontFamily="Times New Roman" HorizontalAlignment="Center"  Width="194">Stop Windows 10 Update</Label>
-        <Label Name="lblstatus" Grid.Row="1" Foreground="Green" FontSize="18" FontFamily="Times New Roman" HorizontalAlignment="Center" Margin="140,0" Width="64">Status :</Label>
+        <Label Name="lblstatus" Grid.Row="1" Foreground="Green" FontSize="18" FontFamily="Times New Roman" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  Width="350">Status :</Label>
         <Button Grid.Row="2" Name="btnStop" Click="btnStop_Click">Stop The Service</Button>
         <Label Grid.Row="3" Foreground="Black" FontSize="8" FontFamily="Times New Roman" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="194">Run Me As An Administrator</Label>
 

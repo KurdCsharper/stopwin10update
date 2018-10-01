@@ -5,15 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:stopwin10update"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Irantutors.com" Height="200" Width="350" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="34*"></RowDefinition>
+            <RowDefinition Height="34*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+            <RowDefinition Height="35*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Foreground="Green" FontSize="18" FontFamily="Times New Roman" HorizontalAlignment="Center">Stop Windows 10 Update</Label>
-        <Label Name="lblstatus" Grid.Row="1" Foreground="Green" FontSize="18" FontFamily="Times New Roman" HorizontalAlignment="Center">Status :</Label>
-        <Button Grid.Row="2" Height="50" Name="btnStop" Click="btnStop_Click" Width="300">Stop The Service</Button>
+        <Label Grid.Row="0" Foreground="Black" FontSize="18" FontFamily="Times New Roman" HorizontalAlignment="Center"  Width="194">Stop Windows 10 Update</Label>
+        <Label Name="lblstatus" Grid.Row="1" Foreground="Green" FontSize="18" FontFamily="Times New Roman" HorizontalAlignment="Center" Margin="140,0" Width="64">Status :</Label>
+        <Button Grid.Row="2" Name="btnStop" Click="btnStop_Click">Stop The Service</Button>
+        <Label Grid.Row="3" Foreground="Black" FontSize="8" FontFamily="Times New Roman" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="194">Run Me As Administrator</Label>
+
     </Grid>
 </Window>

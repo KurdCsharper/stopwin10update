@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+
 namespace stopwin10update
 {
 
@@ -23,18 +25,47 @@ namespace stopwin10update
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static string serviceName = "";
         public MainWindow()
         {
             InitializeComponent();
-            ServiceController controller = GetService("wuauserv");
-            lblstatus.Content = controller.Status.ToString();
+
+
+            serviceName = "wuauserv";
+            ServiceController controller = GetService();
+            ///add timer
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
         }
-       
+
+
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            RefreshLabel();
+        }
+        /// <summary>
+        /// Refresh the status lable value
+        /// </summary>
+        private void RefreshLabel()
+        {
+         
+                lblstatus.Dispatcher.BeginInvoke(new Action(delegate
+                {
+                    // Do your work
+
+                    lblstatus.Content = IsServiceRunning();
+                }));
+            
+        }
+
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                StopService("wuauserv");
+                StopService();
 
             }
             catch (Exception er)
@@ -48,7 +79,7 @@ namespace stopwin10update
         /// Get Service
         /// </summary>
         /// <param name="serviceName">Service Name</param>
-        public static ServiceController GetService(string serviceName)
+        public static ServiceController GetService()
         {
             ServiceController[] services = ServiceController.GetServices();
             foreach (var item in services)
@@ -63,13 +94,13 @@ namespace stopwin10update
         /// <summary>
         /// check service status
         /// </summary>
-        public static bool IsServiceRunning(string serviceName)
+        public static bool IsServiceRunning()
         {
             ServiceControllerStatus status;
             uint counter = 0;
             do
             {
-                ServiceController service = GetService(serviceName);
+                ServiceController service = GetService();
                 if (service == null)
                 {
                     return false;
@@ -85,12 +116,12 @@ namespace stopwin10update
 
         public static bool IsServiceInstalled(string serviceName)
         {
-            return GetService(serviceName) != null;
+            return GetService() != null;
         }
 
-        public static void StartService(string serviceName)
+        public static void StartService()
         {
-            ServiceController controller = GetService(serviceName);
+            ServiceController controller = GetService();
             if (controller == null)
             {
                 return;
@@ -99,9 +130,9 @@ namespace stopwin10update
             controller.Start();
             controller.WaitForStatus(ServiceControllerStatus.Running);
         }
-        public static void StopService(string serviceName)
+        public static void StopService()
         {
-            ServiceController controller = GetService("wuauserv");
+            ServiceController controller = GetService();
             if (controller == null)
             {
                 return;
